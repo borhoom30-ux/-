@@ -4205,6 +4205,34 @@ window.addEventListener('load',async function(){
     }
   });
 });
+<div id="pwaInstall" style="display:none;position:fixed;bottom:80px;left:16px;right:16px;background:linear-gradient(135deg,#4F46E5,#7C3AED);border-radius:16px;padding:16px;z-index:9999;box-shadow:0 8px 32px rgba(0,0,0,.5)">
+  <div style="font-size:.85rem;font-weight:800;color:#fff;margin-bottom:8px">📱 ثبّت التطبيق</div>
+  <div style="font-size:.7rem;color:rgba(255,255,255,.8);margin-bottom:12px">احصل على تجربة أفضل كتطبيق مستقل</div>
+  <div style="display:flex;gap:8px">
+    <button id="pwaInstallBtn" style="flex:1;padding:10px;background:#fff;color:#4F46E5;border:none;border-radius:10px;font-weight:800;font-size:.8rem;cursor:pointer">⚡ تثبيت</button>
+    <button id="pwaDismissBtn" style="padding:10px 14px;background:rgba(255,255,255,.15);color:#fff;border:none;border-radius:10px;font-size:.8rem;cursor:pointer">لاحقاً</button>
+  </div>
+</div>
+<script>
+let deferredPrompt;
+window.addEventListener('beforeinstallprompt', function(e) {
+  e.preventDefault();
+  deferredPrompt = e;
+  document.getElementById('pwaInstall').style.display = 'block';
+});
+document.getElementById('pwaInstallBtn').addEventListener('click', function() {
+  if(deferredPrompt) {
+    deferredPrompt.prompt();
+    deferredPrompt.userChoice.then(function() {
+      deferredPrompt = null;
+      document.getElementById('pwaInstall').style.display = 'none';
+    });
+  }
+});
+document.getElementById('pwaDismissBtn').addEventListener('click', function() {
+  document.getElementById('pwaInstall').style.display = 'none';
+});
+</script>
 </script>
 </body>
-        </html>
+            </html>
