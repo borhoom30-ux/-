@@ -180,11 +180,11 @@ a { color: inherit; text-decoration: none; }
 }
 
 /* ── LAYOUT ── */
-#app { min-height: 100svh; display: flex; flex-direction: column; position: relative; z-index: 1; }
+#app { height: 100svh; display: flex; flex-direction: column; position: relative; z-index: 1; overflow: hidden; }
 
 /* Pages */
-.page { display: none; flex: 1; flex-direction: column; }
-.page.active { display: flex; flex: 1; min-height: 0; }
+.page { display: none; flex-direction: column; }
+.page.active { display: flex; flex: 1; overflow: hidden; min-height: 0; }
 
 .page-content {
 flex: 1;
@@ -195,6 +195,7 @@ flex: 1;
   max-width: var(--max-w);
   width: 100%;
   margin: 0 auto;
+  height: 0;
 }
 
 /* ── TOP NAV ── */
@@ -1582,7 +1583,7 @@ scrollbar-width: none; flex-shrink: 0;
 </div>
 
 <!-- ══════════ MAIN APP ══════════ -->
-<div id="mainApp" style="display:none;flex-direction:column;min-heigh:100svh;overflow:hidden"
+<div id="mainApp" style="display:none;flex-direction:column;height:100svh;overflow:hidden">
 
   <!-- Top Nav -->
   <nav id="topNav">
