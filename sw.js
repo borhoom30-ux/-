@@ -1,15 +1,15 @@
-const CACHE_NAME = 'elite-preds-v1';
-const ASSETS = [
+const CACHE_NAME = 'elite-v2';
+
+const urlsToCache = [
   '/',
-  '/index.html',
-  '/manifest.json'
+  '/index.html'
 ];
 
 self.addEventListener('install', e => {
-  e.waitUntil(
-    caches.open(CACHE_NAME).then(c => c.addAll(ASSETS))
-  );
   self.skipWaiting();
+  e.waitUntil(
+    caches.open(CACHE_NAME).then(cache => cache.addAll(urlsToCache))
+  );
 });
 
 self.addEventListener('activate', e => {
@@ -22,12 +22,9 @@ self.addEventListener('activate', e => {
 });
 
 self.addEventListener('fetch', e => {
-  // Supabase requests — شبكة فقط
-  if (e.request.url.includes('supabase.co')) {
-    e.respondWith(fetch(e.request));
-    return;
-  }
   e.respondWith(
-    caches.match(e.request).then(r => r || fetch(e.request))
+    fetch(e.request).catch(() =>
+      caches.match(e.request)
+    )
   );
 });
