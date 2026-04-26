@@ -2363,6 +2363,8 @@ function updateNavRound(round){
 function renderNoPredPage(){
   document.getElementById('predContent').innerHTML='<div class="empty-state"><div class="empty-icon">⏳</div><div class="empty-title">لا توجد جولة مفتوحة</div><div class="empty-sub">انتظر المشرف لفتح جولة جديدة</div></div>';
   document.getElementById('submitBar').style.display='none';
+  var dblW = document.getElementById('dblWarning');
+if(dblW) dblW.style.display='none';
 }
 function restoreSubmittedPreds(){
   if(!S.pageData||!S.pageData.myPredictions) return;
